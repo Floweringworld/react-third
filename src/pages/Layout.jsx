@@ -6,37 +6,18 @@ import { getUserInfo } from "../lib/api/auth";
 const Layout = ({ setUser, user }) => {
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     return;
-  //   }
-  //   getUserInfo().then((res) => {
-  //     console.log(res);
-  //     setUser({
-  //       userId: res.id,
-  //       nickname: res.nickname,
-  //       avatar: res.avatar,
-  //     }).catch(() => {
-  //       navigate("/Login");
-  //     });
-  //   });
-
-  //   console.log("user", user);
-  // }, []);
-
   useEffect(() => {
-    const dd = async () => {
-      try {
-        const response = await getUserInfo();
-        return response;
-      } catch (error) {
-        console.error("Error updating selected month:", error);
-        return null;
-      }
-    };
-    dd().then((result) => {
-      console.log(result);
-    });
+    getUserInfo()
+      .then((res) => {
+        setUser({
+          userId: res.id,
+          nickname: res.nickname,
+          avatar: res.avatar,
+        });
+      })
+      .catch(() => {
+        navigate("/Login");
+      });
   }, []);
 
   const handleLogout = () => {
@@ -55,8 +36,8 @@ const Layout = ({ setUser, user }) => {
         <StUserProfile>
           {user && (
             <>
-              <StUserImg src={user.avatar} alt="User Avatar" />
               <StUSerName>{user.nickname}</StUSerName>
+              <StUserImg src={user.avatar} alt="User Avatar" />
               <StNavigateBtn onClick={handleLogout}>로그아웃</StNavigateBtn>
             </>
           )}
@@ -68,7 +49,7 @@ const Layout = ({ setUser, user }) => {
 };
 
 const StHeader = styled.div`
-  background-color: #636363;
+  background-color: #2ec4b6;
   padding: 10px;
   width: 100%;
   margin-bottom: 10px;
@@ -99,17 +80,17 @@ const StLink = styled(Link)`
 const StUserProfile = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 `;
 
 const StUserImg = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
 `;
 
 const StUSerName = styled.p`
-  font-size: 20px;
+  font-size: 18px;
   color: white;
 `;
 
