@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { getExpense, puExpense, deleteExpense } from "../lib/api/expense";
 
 const Container = styled.div`
@@ -63,25 +63,15 @@ export default function Detail() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const {
-    data: selectedExpense,
-    isLoading,
-    error,
-  } = useQuery({ queryKey: ["expense", id], queryFn: getExpense });
+  const { data: selectedExpense } = useQuery({
+    queryKey: ["expense", id],
+    queryFn: getExpense,
+  });
 
   const [date, setDate] = useState("");
   const [item, setItem] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
-
-  useEffect(() => {
-    if (selectedExpense) {
-      setDate(selectedExpense.date);
-      setItem(selectedExpense.item);
-      setAmount(selectedExpense.amount);
-      setDescription(selectedExpense.description);
-    }
-  }, [selectedExpense]);
 
   const mutationEdit = useMutation({
     mutationFn: puExpense,
@@ -122,6 +112,15 @@ export default function Detail() {
   const handleDelete = () => {
     mutationDelete.mutate(id);
   };
+
+  useEffect(() => {
+    if (selectedExpense) {
+      setDate(selectedExpense.date);
+      setItem(selectedExpense.item);
+      setAmount(selectedExpense.amount);
+      setDescription(selectedExpense.description);
+    }
+  }, [selectedExpense]);
 
   return (
     <Container>
