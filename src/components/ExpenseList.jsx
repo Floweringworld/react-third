@@ -65,11 +65,10 @@ const ExpenseDetails = styled.div`
 export default function ExpenseList({ month }) {
   const navigate = useNavigate();
 
-  const {
-    data: expenses = [],
-    isLoading,
-    error,
-  } = useQuery({ queryKey: ["expense"], queryFn: getExpenses });
+  const { data: expenses = [], isLoading } = useQuery({
+    queryKey: ["expense"],
+    queryFn: getExpenses,
+  });
 
   const monthData = expenses.filter((post) => {
     const date = new Date(post.date).getMonth() + 1;

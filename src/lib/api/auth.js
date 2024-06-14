@@ -56,6 +56,8 @@ export const updateProfile = async (fromData) => {
         },
       });
       return response.data;
-    } catch (error) {}
+    } catch (error) {
+      alert("AccessToken이 만료되었습니다.");
+    }
   }
 };
