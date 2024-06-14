@@ -1,9 +1,9 @@
-# React + Vite
+# 개인지출관리
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- 저번 과제 이어서 로그인&회원가입 기능 추가
+- Json-server 사용
+- Tanstack Query 사용
 
-Currently, two official plugins are available:
+# Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# assignment-3-answer
+- 2024.06.10 ~ 06.14
